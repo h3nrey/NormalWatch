@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Watch</title>
+
+    <!-- externals -->
+    <script src="https://unpkg.com/vue@3.0.11/dist/vue.global.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/e9cc5f7524.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <i class="fa-solid fa-clock"></i>
+            <h1>Normal Watch</h1>
+        </header>
+
+        <div id="app" class="app__wrapper">
+            <div id="type__title__wrapper">
+                <h1 id="type__title" :class="{shake: type}">{{title}}</h1>
+            </div>
+            
+            <div id="hour__container">
+                <input class="minutes text time__input" type="number" v-model="minutesValue" @change="inputUpdated()" :readonly="type === 'stopwatch'">
+                <div id="points">:</div>
+                <input class="seconds text time__input"  type="number" v-model="secondsValue" :readonly="type === 'stopwatch'">
+            </div>
+
+            <div id="buttons__container">
+                <option-button @start-watch="startWatch" @stop-watch="stopWatch"></option-button>
+            </div>
+
+            <div id="type__container">
+                <type-button @change-type="changeType"></type-button>
+            </div>
+        </div>
+    </div>
+
+    <audio src="Assets/nuclearAlarm.mp3"></audio>
+
+    <!-- import app  -->
+    <script src="main.js"></script>
+
+    <!-- import components -->
+    <script src="./components/TypeButton.js"></script>
+    <script src="./components/OptionsButton.js"></script>
+    <script>
+        const mountedApp = app.mount("#app");
+    </script>
+</body>
+</html>

@@ -1,12 +1,10 @@
 var coroutine;
-let seconds = document.querySelector(".seconds")
-let minutes = document.querySelector(".minutes")
 
 const app = Vue.createApp({
     data(){
         return{
             title: "Stopwatch",
-            type: "stopwatch",
+            type: "Stopwatch",
             secondsValue: 0,
             minutesValue: 0,
             onStopwatchMode: true,
@@ -20,44 +18,43 @@ const app = Vue.createApp({
             this.resetWatch();
         },
         startWatch(){
-            if(this.type == "stopwatch") {
-                window.clearInterval(coroutine);
-                coroutine =  window.setInterval(() => {        
-                    if(this.secondsValue < 100) {
-                        this.secondsValue++;
-    
-                        if(this.secondsValue == 100) {
-                            this.minutesValue++;
-                            this.secondsValue =0;
-                        }
-                    }
-                },100) // --->>this need to be changed to 1000
-            } else if(this.type == "timer") {
-                if(this.secondsValue > 0 || this.minutesValue > 0) {
-                    this.timer =  window.setInterval(() => {
-
-                        if(this.secondsValue  == 0 && this.minutesValue > 0) {
-                            console.log("test");    
-                            this.minutesValue--;
-                                this.secondsValue = 60;
-                        }
-                        if(this.secondsValue > 0) {
-                            this.secondsValue--;
-                            if(this.secondsValue == 0 && this.minutesValue == 0) {
-                                window.clearInterval(coroutine);
-                                playAudio();
-                            }
-                        }
-                    },1000)
-                }   
-            }
-            
+            if(this.type == "Stopwatch") {
+                this.stopwatch();
+            } else if(this.type == "Timer") {
+                this.timer();
+            }    
         },
         stopwatch(){
+            this.resetWatch();
+            coroutine =  window.setInterval(() => {        
+                if(this.secondsValue < 100) {
+                    this.secondsValue++;
 
+                    if(this.secondsValue == 100) {
+                        this.minutesValue++;
+                        this.secondsValue =0;
+                    }
+                }
+            },100)
+        },
+        timer(){
+            if(this.secondsValue > 0 || this.minutesValue > 0) {
+                this.timer =  window.setInterval(() => {
+                    if(this.secondsValue  == 0 && this.minutesValue > 0) {  
+                        this.minutesValue--;
+                        this.secondsValue = 60;
+                    }
+                    if(this.secondsValue > 0) {
+                        this.secondsValue--;
+                        if(this.secondsValue == 0 && this.minutesValue == 0) {
+                            window.clearInterval(coroutine);
+                            playAudio();
+                        }
+                    }
+                },1000)
+            }  
         },
         resetWatch(){
-            console.log("stopped");
             window.clearInterval(coroutine);
             this.minutesValue = 0;
             this.secondsValue = 0;

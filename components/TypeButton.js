@@ -9,8 +9,8 @@ app.component('type-button',{
     data(){
         return{
             buttons: [
-                {id: 1, icon:"fa-solid fa-clock", clockType:"timer", classes:"type__button text"},
-                {id: 2, icon:"fa-solid fa-stopwatch", clockType:"stopwatch", classes:"type__button text active"}
+                {id: 1, icon:"fa-solid fa-clock", clockType:"Timer", classes:"type__button text"},
+                {id: 2, icon:"fa-solid fa-stopwatch", clockType:"Stopwatch", classes:"type__button text active"}
             ]
         }
     },
